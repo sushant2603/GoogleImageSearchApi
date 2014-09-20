@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import com.sushant2603.googleimagesearch.R;
 
 public class ImageSearchActivity extends Activity {
 
