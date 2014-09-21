@@ -1,6 +1,5 @@
 package com.example.googleimagesearch.activities;
 
-import android.app.Activity;
 import android.app.DialogFragment;
 import android.os.Bundle;
 import android.view.LayoutInflater;

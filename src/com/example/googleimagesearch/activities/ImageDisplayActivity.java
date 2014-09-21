@@ -3,9 +3,6 @@ package com.example.googleimagesearch.activities;
 import com.example.googleimagesearch.models.ImageResult;
 import com.squareup.picasso.Picasso;
 import com.sushant2603.googleimagesearch.R;
-import com.sushant2603.googleimagesearch.R.id;
-import com.sushant2603.googleimagesearch.R.layout;
-import com.sushant2603.googleimagesearch.R.menu;
 
 import android.app.Activity;
 import android.os.Bundle;

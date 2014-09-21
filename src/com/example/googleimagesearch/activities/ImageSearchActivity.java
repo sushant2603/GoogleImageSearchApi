@@ -7,9 +7,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import android.app.Activity;
 import android.app.Fragment;
-import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.os.Bundle;
@@ -47,6 +45,14 @@ public class ImageSearchActivity extends FragmentActivity {
 		aImageResults = new ImageResultsAdapter(this, imageResults);
 		gvResults.setAdapter(aImageResults);
 		filterSettings = new FilterSetting();
+        gvResults.setOnScrollListener(new EndlessScrollListener() {
+		    @Override
+		    public void onLoadMore(int page, int totalItemsCount) {
+	            // Triggered only when new data needs to be appended to the list
+	            // Add whatever code is needed to append new items to your AdapterView
+		        GetResults(totalItemsCount); 
+		    }
+        });
 	}
 
 	private void setUpViews() {
@@ -70,10 +76,11 @@ public class ImageSearchActivity extends FragmentActivity {
 		return true;
 	}
 
-	private void GetResults(String query) {
+	private void GetResults(int start) {
+		String query = etQuery.getText().toString();
     	AsyncHttpClient client = new AsyncHttpClient();
     	String searchUrl = "https://ajax.googleapis.com/ajax/services/search/images?v=1.0&q="
-    			+ query + "&rsz=8";
+    			+ query + "&rsz=8" + "&start=" + Integer.toString(start);
 		if (!filterSettings.color.isEmpty()) {
 			searchUrl += "&imgcolor=" + filterSettings.color;
 		}
@@ -95,7 +102,6 @@ public class ImageSearchActivity extends FragmentActivity {
     			try {
     				imageResultsJson= response.getJSONObject("responseData").getJSONArray("results");
     				// TODO: Handle this for pagination.
-    				imageResults.clear();
     				aImageResults.addAll(ImageResult.fromJSONArray(imageResultsJson));
     			} catch (JSONException e) {
     				e.printStackTrace();
@@ -107,8 +113,8 @@ public class ImageSearchActivity extends FragmentActivity {
 
 	// Fired when search button is clicked.
 	public void onImageSearch(View view) {
-		String query = etQuery.getText().toString();
-		GetResults(query);
+		aImageResults.clear();
+		GetResults(0);
 	}
 
 	public void onSettingsAction(MenuItem mi) {
@@ -125,7 +131,7 @@ public class ImageSearchActivity extends FragmentActivity {
 			@Override
 			public void onFinishSettingsDialog(FilterSetting settings) {
 				filterSettings = settings;
-				GetResults(etQuery.getText().toString());
+				GetResults(0);
 			}
 		};
 	}
