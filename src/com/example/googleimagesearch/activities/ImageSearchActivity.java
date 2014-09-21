@@ -8,8 +8,12 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import android.app.Activity;
+import android.app.Fragment;
+import android.app.FragmentManager;
+import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.FragmentActivity;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -19,17 +23,20 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.EditText;
 import android.widget.GridView;
 
+import com.example.googleimagesearch.activities.SettingsDialog.SettingsDialogListener;
 import com.example.googleimagesearch.adapters.ImageResultsAdapter;
+import com.example.googleimagesearch.models.FilterSetting;
 import com.example.googleimagesearch.models.ImageResult;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.JsonHttpResponseHandler;
 import com.sushant2603.googleimagesearch.R;
 
-public class ImageSearchActivity extends Activity {
+public class ImageSearchActivity extends FragmentActivity {
 	private EditText etQuery;
 	private GridView gvResults;
 	private ArrayList<ImageResult> imageResults;
 	private ImageResultsAdapter aImageResults;
+	private FilterSetting filterSettings;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -39,6 +46,7 @@ public class ImageSearchActivity extends Activity {
 		imageResults = new ArrayList<ImageResult>();
 		aImageResults = new ImageResultsAdapter(this, imageResults);
 		gvResults.setAdapter(aImageResults);
+		filterSettings = new FilterSetting();
 	}
 
 	private void setUpViews() {
@@ -62,11 +70,22 @@ public class ImageSearchActivity extends Activity {
 		return true;
 	}
 
-	// Fired when search button is clicked.
-	public void onImageSearch(View view) {
-		String query = etQuery.getText().toString();
+	private void GetResults(String query) {
     	AsyncHttpClient client = new AsyncHttpClient();
-    	String searchUrl = "https://ajax.googleapis.com/ajax/services/search/images?v=1.0&q=" + query + "&rsz=8";
+    	String searchUrl = "https://ajax.googleapis.com/ajax/services/search/images?v=1.0&q="
+    			+ query + "&rsz=8";
+		if (!filterSettings.color.isEmpty()) {
+			searchUrl += "&imgcolor=" + filterSettings.color;
+		}
+		if (!filterSettings.size.isEmpty()) {
+			searchUrl += "&imgsz=" + filterSettings.size;
+		}
+		if (!filterSettings.type.isEmpty()) {
+			searchUrl += "&imgtype=" + filterSettings.type;
+		}
+		if (!filterSettings.site.isEmpty()) {
+			searchUrl += "&as_sitesearch=" + filterSettings.site;
+		}
     	client.get(searchUrl, new JsonHttpResponseHandler() {
     		@Override
     		public void onSuccess(int statusCode, Header[] headers,
@@ -84,6 +103,31 @@ public class ImageSearchActivity extends Activity {
     			super.onSuccess(statusCode, headers, response);
     		}
     	});
+	}
+
+	// Fired when search button is clicked.
+	public void onImageSearch(View view) {
+		String query = etQuery.getText().toString();
+		GetResults(query);
+	}
+
+	public void onSettingsAction(MenuItem mi) {
+	    FragmentTransaction ft = getFragmentManager().beginTransaction();
+	    Fragment prev = getFragmentManager().findFragmentByTag("dialog");
+	    if (prev != null) {
+	        ft.remove(prev);
+	    }
+	    ft.addToBackStack(null);
+		SettingsDialog dialog = SettingsDialog.newInstance(filterSettings);
+		dialog.show(ft, "settings");
+		dialog.listener = new SettingsDialogListener() {
+
+			@Override
+			public void onFinishSettingsDialog(FilterSetting settings) {
+				filterSettings = settings;
+				GetResults(etQuery.getText().toString());
+			}
+		};
 	}
 
 	@Override

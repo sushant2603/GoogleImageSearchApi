@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/layoutSetting"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.googleimagesearch.activities.ImageDisplayActivity" >
+
+    <TextView
+        android:id="@+id/tvSettingsTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:text="@string/settings_title_text"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+    <TextView
+        android:id="@+id/tvSettingSize"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/tvSettingsTitle"
+        android:paddingTop="30dp"
+        android:text="@string/setting_image_size" />
+
+    <Spinner
+        android:id="@+id/spSettingsize"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/tvSettingSize"
+        android:layout_alignLeft="@+id/spSettingType"
+        android:layout_alignParentRight="true"
+        android:layout_alignTop="@+id/tvSettingSize"
+        android:layout_below="@+id/tvSettingsTitle" />
+
+    <TextView
+        android:id="@+id/tvSettingType"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/tvSettingColor"
+        android:paddingTop="30dp"
+        android:text="@string/settings_image_type" />
+
+    <Spinner
+        android:id="@+id/spSettingType"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/tvSettingType"
+        android:layout_alignParentRight="true"
+        android:layout_alignTop="@+id/tvSettingType"
+        android:layout_below="@+id/tvSettingColor"
+        android:layout_toRightOf="@+id/tvSettingType" />
+
+    <TextView
+        android:id="@+id/tvSettingSite"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/tvSettingType"
+        android:paddingTop="30dp"
+        android:text="@string/settings_site_filter" />
+
+    <EditText
+        android:id="@+id/etSettingSite"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignBottom="@+id/tvSettingSite"
+        android:layout_alignTop="@+id/tvSettingSite"
+        android:layout_toRightOf="@+id/tvSettingSite"
+        android:ems="10" />
+
+    <TextView
+        android:id="@+id/tvSettingColor"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/tvSettingSize"
+        android:layout_marginTop="18dp"
+        android:paddingTop="30dp"
+        android:text="@string/setting_color_filter" />
+
+    <Spinner
+        android:id="@+id/spSettingColor"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/tvSettingColor"
+        android:layout_alignParentRight="true"
+        android:layout_alignTop="@+id/tvSettingColor"
+        android:layout_below="@+id/tvSettingColor"
+        android:layout_toRightOf="@+id/tvSettingColor" />
+
+    <Button
+        android:id="@+id/btnSettingSave"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/etSettingSite"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="36dp"
+        android:text="@string/setting_save_btn" />
+
+</RelativeLayout>

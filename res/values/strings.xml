@@ -9,5 +9,43 @@
     <string name="image_title_label">Image Title</string>
     <string name="image_description">Image Description</string>
     <string name="title_activity_image_display">ImageDisplayActivity</string>
+    <string name="settings_title">Settings Title</string>
+    <string name="settings_title_text">Search Filters</string>
+    <string name="setting_image_size">Image Size</string>
+    <string name="setting_color_filter">Color Filter</string>
+    <string name="settings_image_type">Image Type</string>
+    <string name="settings_site_filter">Site Filter</string>
+    <string name="setting_save_btn">Save</string>
 
+    <string-array name="image_colors_array">
+		<item>black</item>
+		<item>blue</item>
+		<item>brown</item>
+		<item>gray</item>
+		<item>green</item>
+		<item>orange</item>
+		<item>pink</item>
+		<item>purple</item>
+		<item>red</item>
+		<item>teal</item>
+		<item>white</item>
+		<item>yellow</item>
+    </string-array>
+
+    <string-array name="image_size_array">
+		<item>icon</item>
+		<item>small</item>
+		<item>medium</item>
+		<item>large</item>
+		<item>xlarge</item>
+		<item>xxlarge</item>
+		<item>huge</item>
+    </string-array>
+
+    <string-array name="image_type_array">
+		<item>face</item>
+		<item>photo</item>
+		<item>clipart</item>
+		<item>lineart</item>
+    </string-array>
 </resources>
