@@ -18,10 +18,6 @@ import com.sushant2603.googleimagesearch.R;
 
 public class SettingsDialog extends DialogFragment {
 
-	/*private TextView tvSettingSize;
-	private TextView tvSettingColor;
-	private TextView tvSettingType;
-	private TextView tvSettingSite;*/
 	private Spinner spSettingSize;
 	private Spinner spSettingColor;
 	private Spinner spSettingType;
@@ -46,22 +42,12 @@ public class SettingsDialog extends DialogFragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_settings, container);
-        /*tvSettingSite = (TextView) view.findViewById(R.id.tvSettingSite);
-        tvSettingColor = (TextView) view.findViewById(R.id.tvSettingColor);
-        tvSettingSize = (TextView) view.findViewById(R.id.tvSettingSize);
-        tvSettingType = (TextView) view.findViewById(R.id.tvSettingType);*/
         filterSetting = (FilterSetting) getArguments().getSerializable("filterSetting");
         etSettingSite = (EditText) view.findViewById(R.id.etSettingSite);
         spSettingSize = (Spinner) view.findViewById(R.id.spSettingsize);
         spSettingColor = (Spinner) view.findViewById(R.id.spSettingColor);
         spSettingType = (Spinner) view.findViewById(R.id.spSettingType);
 
-        if (filterSetting != null) {
-	        etSettingSite.setText(filterSetting.site);
-	        spSettingSize.setSelection(filterSetting.sizePos);
-	        spSettingColor.setSelection(filterSetting.colorPos);
-	        spSettingType.setSelection(filterSetting.typePos);
-        }
         saveButton = (Button) view.findViewById(R.id.btnSettingSave);
         ArrayAdapter<CharSequence> aSettingColor = ArrayAdapter.createFromResource(getActivity(),
         		R.array.image_colors_array, android.R.layout.simple_spinner_item);
@@ -77,8 +63,8 @@ public class SettingsDialog extends DialogFragment {
 
 			@Override
 			public void onNothingSelected(AdapterView<?> parent) {
-				filterSetting.colorPos = -1;
-				filterSetting.color = "Any";
+				filterSetting.colorPos = 0;
+				filterSetting.color = "any";
 			}
 		});
 
@@ -94,8 +80,8 @@ public class SettingsDialog extends DialogFragment {
 
 			@Override
 			public void onNothingSelected(AdapterView<?> parent) {
-				filterSetting.sizePos = -1;
-				filterSetting.size = "Any";
+				filterSetting.sizePos = 0;
+				filterSetting.size = "any";
 			}
 		});
 
@@ -112,8 +98,8 @@ public class SettingsDialog extends DialogFragment {
 
 			@Override
 			public void onNothingSelected(AdapterView<?> parent) {
-				filterSetting.typePos = -1;
-				filterSetting.type = "Any";
+				filterSetting.typePos = 0;
+				filterSetting.type = "any";
 			}
 		});
 
@@ -127,19 +113,15 @@ public class SettingsDialog extends DialogFragment {
             }
         });
 
+        if (filterSetting != null) {
+	        etSettingSite.setText(filterSetting.site);
+	        spSettingSize.setSelection(filterSetting.sizePos);
+	        spSettingColor.setSelection(filterSetting.colorPos);
+	        spSettingType.setSelection(filterSetting.typePos);
+        }
+
         getDialog().getWindow().setSoftInputMode(
         		WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
         return view;
     }
-
-    /*@Override
-    public void onAttach(Activity activity) {
-		super.onAttach(activity);
-		try {
-		    SettingsDialogListener listener = (SettingsDialogListener) activity;
-		} catch (ClassCastException e) {
-		    throw new ClassCastException(activity.toString()
-		            + " must implement NoticeDialogListener");
-		}
-    }*/
 }

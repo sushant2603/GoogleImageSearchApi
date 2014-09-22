@@ -15,13 +15,13 @@ public class FilterSetting implements Serializable {
 	public int sitePos;
 
 	public FilterSetting() {
-		size = "";
-		type = "";
-		color = "";
+		size = "any";
+		type = "any";
+		color = "any";
 		site = "";
-		sizePos = -1;
-		colorPos = -1;
-		typePos = -1;
-		sitePos = -1;
+		sizePos = 0;
+		colorPos = 0;
+		typePos = 0;
+		sitePos = 0;
 	}
 }

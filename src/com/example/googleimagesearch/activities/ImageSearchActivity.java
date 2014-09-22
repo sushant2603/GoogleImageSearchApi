@@ -19,8 +19,11 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.EditText;
-import android.widget.GridView;
+import android.widget.SearchView;
+import android.widget.SearchView.OnQueryTextListener;
+import android.widget.Toast;
 
+import com.etsy.android.grid.StaggeredGridView;
 import com.example.googleimagesearch.activities.SettingsDialog.SettingsDialogListener;
 import com.example.googleimagesearch.adapters.ImageResultsAdapter;
 import com.example.googleimagesearch.models.FilterSetting;
@@ -31,7 +34,8 @@ import com.sushant2603.googleimagesearch.R;
 
 public class ImageSearchActivity extends FragmentActivity {
 	private EditText etQuery;
-	private GridView gvResults;
+	private String currentQuery;
+	private StaggeredGridView gvResults;
 	private ArrayList<ImageResult> imageResults;
 	private ImageResultsAdapter aImageResults;
 	private FilterSetting filterSettings;
@@ -45,6 +49,20 @@ public class ImageSearchActivity extends FragmentActivity {
 		aImageResults = new ImageResultsAdapter(this, imageResults);
 		gvResults.setAdapter(aImageResults);
 		filterSettings = new FilterSetting();
+	}
+
+	private void setUpViews() {
+		etQuery = (EditText) findViewById(R.id.etQuery);
+		gvResults = (StaggeredGridView) findViewById(R.id.gvResults);
+		gvResults.setOnItemClickListener(new OnItemClickListener() {
+			@Override
+			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+				Intent i = new Intent(ImageSearchActivity.this, ImageDisplayActivity.class);
+				ImageResult result = imageResults.get(position);
+				i.putExtra("result", result);
+				startActivity(i);
+			}
+		});
         gvResults.setOnScrollListener(new EndlessScrollListener() {
 		    @Override
 		    public void onLoadMore(int page, int totalItemsCount) {
@@ -55,39 +73,42 @@ public class ImageSearchActivity extends FragmentActivity {
         });
 	}
 
-	private void setUpViews() {
-		etQuery = (EditText) findViewById(R.id.etQuery);
-		gvResults = (GridView) findViewById(R.id.gvResults);
-		gvResults.setOnItemClickListener(new OnItemClickListener() {
-			@Override
-			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-				Intent i = new Intent(ImageSearchActivity.this, ImageDisplayActivity.class);
-				ImageResult result = imageResults.get(position);
-				i.putExtra("result", result);
-				startActivity(i);
-			}
-		});
-	}
-
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
 		getMenuInflater().inflate(R.menu.settings, menu);
+		MenuItem searchItem = menu.findItem(R.id.action_search);
+
+		SearchView searchView = (SearchView) searchItem.getActionView();
+		searchView.setOnQueryTextListener(new OnQueryTextListener() {
+			@Override
+			public boolean onQueryTextSubmit(String query) {
+				currentQuery = query;
+				aImageResults.clear();
+				GetResults(0);
+				return true;
+			}
+			@Override
+			public boolean onQueryTextChange(String newText) {
+				return false;
+			}
+		});
+
 		return true;
 	}
 
 	private void GetResults(int start) {
-		String query = etQuery.getText().toString();
+		currentQuery = etQuery.getText().toString();
     	AsyncHttpClient client = new AsyncHttpClient();
     	String searchUrl = "https://ajax.googleapis.com/ajax/services/search/images?v=1.0&q="
-    			+ query + "&rsz=8" + "&start=" + Integer.toString(start);
-		if (!filterSettings.color.isEmpty()) {
+    			+ currentQuery + "&rsz=8" + "&start=" + Integer.toString(start);
+		if (!(filterSettings.color.isEmpty())) { // || filterSettings.colorPos == 0)) {
 			searchUrl += "&imgcolor=" + filterSettings.color;
 		}
-		if (!filterSettings.size.isEmpty()) {
+		if (!(filterSettings.size.isEmpty())) { // || filterSettings.sizePos == 0)) {
 			searchUrl += "&imgsz=" + filterSettings.size;
 		}
-		if (!filterSettings.type.isEmpty()) {
+		if (!(filterSettings.type.isEmpty())) { // || filterSettings.typePos == 0)) {
 			searchUrl += "&imgtype=" + filterSettings.type;
 		}
 		if (!filterSettings.site.isEmpty()) {
@@ -101,12 +122,16 @@ public class ImageSearchActivity extends FragmentActivity {
     			JSONArray imageResultsJson;
     			try {
     				imageResultsJson= response.getJSONObject("responseData").getJSONArray("results");
-    				// TODO: Handle this for pagination.
     				aImageResults.addAll(ImageResult.fromJSONArray(imageResultsJson));
     			} catch (JSONException e) {
     				e.printStackTrace();
     			}
     			super.onSuccess(statusCode, headers, response);
+    		}
+    		@Override
+    		public void onFailure(int statusCode, Header[] headers,
+    				String responseString, Throwable throwable) {
+    			Toast.makeText(getBaseContext(), "Failed Url", Toast.LENGTH_SHORT).show();
     		}
     	});
 	}
@@ -131,6 +156,7 @@ public class ImageSearchActivity extends FragmentActivity {
 			@Override
 			public void onFinishSettingsDialog(FilterSetting settings) {
 				filterSettings = settings;
+				aImageResults.clear();
 				GetResults(0);
 			}
 		};

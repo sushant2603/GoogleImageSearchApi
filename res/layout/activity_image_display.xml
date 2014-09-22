@@ -4,17 +4,21 @@
     android:layout_height="match_parent"
     tools:context="com.example.googleimagesearch.activities.ImageDisplayActivity" >
 
-    <ImageView
+    <com.example.googleimagesearch.activities.TouchImageView
+        android:id="@+id/ivImageResult"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_launcher" />
+
+    <!-- ImageView
         android:id="@+id/ivImageResult"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:maxWidth="600dp"
-        android:scaleType="fitXY"
         android:adjustViewBounds="true"
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentRight="true"
         android:layout_alignParentTop="true"
-        android:src="@drawable/ic_launcher" />
-
+        android:src="@drawable/ic_launcher" /-->
 </RelativeLayout>

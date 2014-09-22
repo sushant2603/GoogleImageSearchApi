@@ -18,6 +18,7 @@
     <string name="setting_save_btn">Save</string>
 
     <string-array name="image_colors_array">
+        <item>any</item>
 		<item>black</item>
 		<item>blue</item>
 		<item>brown</item>
@@ -33,6 +34,7 @@
     </string-array>
 
     <string-array name="image_size_array">
+        <item>any</item>
 		<item>icon</item>
 		<item>small</item>
 		<item>medium</item>
@@ -43,6 +45,7 @@
     </string-array>
 
     <string-array name="image_type_array">
+        <item>any</item>
 		<item>face</item>
 		<item>photo</item>
 		<item>clipart</item>

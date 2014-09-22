@@ -1,6 +1,7 @@
 package com.example.googleimagesearch.activities;
 
 import com.example.googleimagesearch.models.ImageResult;
+import com.example.googleimagesearch.activities.TouchImageView;
 import com.squareup.picasso.Picasso;
 import com.sushant2603.googleimagesearch.R;
 
@@ -9,6 +10,7 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 public class ImageDisplayActivity extends Activity {
 
@@ -17,9 +19,10 @@ public class ImageDisplayActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_image_display);
 		ImageResult imageResult= (ImageResult) getIntent().getSerializableExtra("result");
-		ImageView ivImageResult = (ImageView) findViewById(R.id.ivImageResult);
-		Picasso.with(this).load(imageResult.fullUrl).into(ivImageResult);
+		TouchImageView ivImageResult = (TouchImageView) findViewById(R.id.ivImageResult);
+		Picasso.with(this).load(imageResult.fullUrl).resize(600, 600).into(ivImageResult);
 		getActionBar().hide();
+		Toast.makeText(this, "Loaded Iamge", Toast.LENGTH_SHORT).show();
 	}
 
 	@Override
@@ -31,9 +34,6 @@ public class ImageDisplayActivity extends Activity {
 
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
-		// Handle action bar item clicks here. The action bar will
-		// automatically handle clicks on the Home/Up button, so long
-		// as you specify a parent activity in AndroidManifest.xml.
 		int id = item.getItemId();
 		if (id == R.id.action_settings) {
 			return true;
