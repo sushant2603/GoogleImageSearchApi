@@ -12,14 +12,16 @@ public class ImageResult implements Serializable {
 	public String fullUrl;
 	public String thumbUrl;
 	public String title;
-	public int height;
-	public int width;
+	public float height;
+	public float width;
 
 	public ImageResult(JSONObject json) {
 		try {
 			this.fullUrl = json.getString("url");
 			this.thumbUrl = json.getString("tbUrl");
 			this.title = json.getString("title");
+			this.height = Float.parseFloat(json.getString("height"));
+			this.width = Float.parseFloat(json.getString("width"));
 		} catch (JSONException e) {
 			e.printStackTrace();
 		}

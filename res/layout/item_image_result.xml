@@ -4,21 +4,23 @@
     android:layout_height="match_parent"
     android:orientation="vertical" >
 
-    <ImageView
+    <com.etsy.android.grid.util.DynamicHeightImageView
         android:id="@+id/ivImage"
-        android:layout_width="75dp"
-        android:layout_height="75dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingTop="8dp"
+        android:paddingRight="4dp"
+        android:paddingLeft="4dp"
         android:adjustViewBounds="true"
         android:contentDescription="@string/image_description"
-        android:scaleType="fitXY"
+        android:scaleType="centerCrop"
         android:src="@drawable/ic_launcher" />
 
-    <TextView
+    <!-- com.etsy.android.grid.util.DynamicHeightTextView
         android:id="@+id/tvTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/image_title_label"
         android:maxLines="1"
-        android:ellipsize="end" />
-
+        android:ellipsize="end" /-->
 </LinearLayout>

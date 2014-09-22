@@ -33,7 +33,7 @@ import com.loopj.android.http.JsonHttpResponseHandler;
 import com.sushant2603.googleimagesearch.R;
 
 public class ImageSearchActivity extends FragmentActivity {
-	private EditText etQuery;
+	//private EditText etQuery;
 	private String currentQuery;
 	private StaggeredGridView gvResults;
 	private ArrayList<ImageResult> imageResults;
@@ -52,7 +52,7 @@ public class ImageSearchActivity extends FragmentActivity {
 	}
 
 	private void setUpViews() {
-		etQuery = (EditText) findViewById(R.id.etQuery);
+		//etQuery = (EditText) findViewById(R.id.etQuery);
 		gvResults = (StaggeredGridView) findViewById(R.id.gvResults);
 		gvResults.setOnItemClickListener(new OnItemClickListener() {
 			@Override
@@ -98,7 +98,7 @@ public class ImageSearchActivity extends FragmentActivity {
 	}
 
 	private void GetResults(int start) {
-		currentQuery = etQuery.getText().toString();
+		//currentQuery = etQuery.getText().toString();
     	AsyncHttpClient client = new AsyncHttpClient();
     	String searchUrl = "https://ajax.googleapis.com/ajax/services/search/images?v=1.0&q="
     			+ currentQuery + "&rsz=8" + "&start=" + Integer.toString(start);

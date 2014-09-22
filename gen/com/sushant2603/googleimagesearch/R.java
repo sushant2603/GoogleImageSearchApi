@@ -106,25 +106,23 @@ containing a value of this type.
         public static final int ic_settings=0x7f020002;
     }
     public static final class id {
-        public static final int action_search=0x7f090012;
-        public static final int action_settings=0x7f090011;
-        public static final int btnSearch=0x7f090002;
-        public static final int btnSettingSave=0x7f09000e;
-        public static final int etQuery=0x7f090001;
-        public static final int etSettingSite=0x7f09000c;
-        public static final int gvResults=0x7f090003;
-        public static final int ivImage=0x7f09000f;
+        public static final int action_search=0x7f090010;
+        public static final int action_settings=0x7f09000f;
+        public static final int btnSettingSave=0x7f09000c;
+        public static final int etSettingSite=0x7f09000a;
+        public static final int gvResults=0x7f090001;
+        public static final int ivImage=0x7f09000d;
         public static final int ivImageResult=0x7f090000;
-        public static final int layoutSetting=0x7f090004;
-        public static final int spSettingColor=0x7f09000d;
-        public static final int spSettingType=0x7f090008;
-        public static final int spSettingsize=0x7f090007;
-        public static final int tvSettingColor=0x7f09000a;
-        public static final int tvSettingSite=0x7f09000b;
-        public static final int tvSettingSize=0x7f090006;
-        public static final int tvSettingType=0x7f090009;
-        public static final int tvSettingsTitle=0x7f090005;
-        public static final int tvTitle=0x7f090010;
+        public static final int layoutSetting=0x7f090002;
+        public static final int menu_item_share=0x7f09000e;
+        public static final int spSettingColor=0x7f09000b;
+        public static final int spSettingType=0x7f090006;
+        public static final int spSettingsize=0x7f090005;
+        public static final int tvSettingColor=0x7f090008;
+        public static final int tvSettingSite=0x7f090009;
+        public static final int tvSettingSize=0x7f090004;
+        public static final int tvSettingType=0x7f090007;
+        public static final int tvSettingsTitle=0x7f090003;
     }
     public static final class layout {
         public static final int activity_image_display=0x7f030000;
@@ -152,6 +150,7 @@ containing a value of this type.
         public static final int settings_site_filter=0x7f05000d;
         public static final int settings_title=0x7f050008;
         public static final int settings_title_text=0x7f050009;
+        public static final int share_title=0x7f05000f;
         public static final int title_activity_image_display=0x7f050007;
     }
     public static final class style {

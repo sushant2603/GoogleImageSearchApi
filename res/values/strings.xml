@@ -51,4 +51,5 @@
 		<item>clipart</item>
 		<item>lineart</item>
     </string-array>
+		<string name="share_title">Share</string>
 </resources>
