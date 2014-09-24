@@ -27,3 +27,5 @@ Advanced Optional:
 
 Almost Complete:
 1) Improve the user interface and experiment with image assets and/or styling and coloring: Done Somewhat 
+
+![Video Walkthrough](GoogleImageSearch1.gif)
