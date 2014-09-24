@@ -11,17 +11,21 @@ import com.squareup.picasso.Picasso;
 import com.sushant2603.googleimagesearch.R;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.Point;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore.Images;
+import android.view.Display;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.ShareActionProvider;
 import android.widget.Toast;
 
@@ -35,20 +39,28 @@ public class ImageDisplayActivity extends Activity {
 		setContentView(R.layout.activity_image_display);
 		ImageResult imageResult= (ImageResult) getIntent().getSerializableExtra("result");
 		TouchImageView ivImageResult = (TouchImageView) findViewById(R.id.ivImageResult);
-		Picasso.with(this).load(imageResult.fullUrl).resize(600, 600).into(ivImageResult, new Callback() {
+		// Get the main image and modified it to display with right aspect ratio.
+        WindowManager wm = (WindowManager) this.getSystemService(Context.WINDOW_SERVICE);
+        Display display = wm.getDefaultDisplay();
+        Point size = new Point();
+        display.getSize(size);
+        int newWidth = 600;
+        int newHeight = (int) (newWidth * imageResult.width / imageResult.height);
+		Picasso.with(this).load(imageResult.fullUrl).resize(newWidth, newHeight).into(ivImageResult, new Callback() {
 	        @Override
 	        public void onSuccess() {
 	            // Setup share intent now that image has loaded
-	            setupShareIntent();
+	        	if (miShareAction != null) {
+	        		setupShareIntent();
+	        	}
 	        }
 	        
 	        @Override
 	        public void onError() { 
-	            // ...
+	            Toast.makeText(ImageDisplayActivity.this, "Image size too large", Toast.LENGTH_SHORT).show();
 	        }
 	   });
 		//getActionBar().hide();
-		Toast.makeText(this, "Loaded Iamge", Toast.LENGTH_SHORT).show();
 	}
 
 	// Gets the image URI and setup the associated share intent to hook into the provider
@@ -63,7 +75,7 @@ public class ImageDisplayActivity extends Activity {
 	    shareIntent.setType("image/*");
 	    // Attach share event to the menu item provider
 	    miShareAction.setShareIntent(shareIntent);
-	}
+	} 
 
 	public void onShareItem(MenuItem mi) {
         Intent shareIntent = new Intent(Intent.ACTION_SEND);
@@ -112,6 +124,7 @@ public class ImageDisplayActivity extends Activity {
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		int id = item.getItemId();
+		miShareAction = (ShareActionProvider) item.getActionProvider();
 		if (id == R.id.action_settings) {
 			return true;
 		}

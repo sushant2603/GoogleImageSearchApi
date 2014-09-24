@@ -5,14 +5,14 @@
         android:orderInCategory="5"
         android:title="Search"
         android:icon="@drawable/ic_search" 
-        android:showAsAction="ifRoom"
+        android:showAsAction="ifRoom|collapseActionView"
         android:actionViewClass="android.widget.SearchView"/>
 
     <item
         android:id="@id/action_settings"
         android:icon="@drawable/ic_settings"
-        android:orderInCategory="20"
-        android:showAsAction="ifRoom"
+        android:orderInCategory="100"
+        android:showAsAction="always"
         android:title="@string/settings_title"
         android:onClick="onSettingsAction"/>
 </menu>

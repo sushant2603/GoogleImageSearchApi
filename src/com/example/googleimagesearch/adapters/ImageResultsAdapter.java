@@ -8,6 +8,7 @@ import android.text.Html;
 import android.util.Log;
 import android.util.SparseArray;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
@@ -23,13 +24,12 @@ import com.example.googleimagesearch.models.ImageResult;
 
 public class ImageResultsAdapter extends ArrayAdapter<ImageResult> {
 	private final LayoutInflater mLayoutInflater;
-	private final Random mRandom;
 	private static final SparseArray<Double> sPositionHeightRatios = new SparseArray<Double>();
 
 	public ImageResultsAdapter(Context context, List<ImageResult> images) {
 		super(context, android.R.layout.simple_list_item_1, images);
 		this.mLayoutInflater = LayoutInflater.from(context);
-		this.mRandom = new Random();
+		//this.mRandom = new Random();
 	}
 
 	@Override
@@ -40,15 +40,16 @@ public class ImageResultsAdapter extends ArrayAdapter<ImageResult> {
 		}
 		DynamicHeightImageView ivImage = (DynamicHeightImageView) convertView.findViewById(R.id.ivImage);
 		//TextView tvTitle = (DynamicHeightTextView) convertView.findViewById(R.id.tvTitle);
-		double positionHeight = getRandomHeightRatio();
 		ivImage.setHeightRatio(imageInfo.height / imageInfo.width);
 		Picasso.with(getContext()).load(imageInfo.thumbUrl).into(ivImage);
+		/*ivImage.setOnHoverListener(new OnHoverListener() {
+			@Override
+			public boolean onHover(View v, MotionEvent event) {
+				event.
+				return false;
+			}
+		})*/;
 		//tvTitle.setText(Html.fromHtml(imageInfo.title));
 		return convertView;
-	}
-
-	private double getRandomHeightRatio() {
-		return (mRandom.nextDouble() / 2.0) + 1.0; // height will be 1.0 - 1.5
-													// the width
 	}
 }
