@@ -11,21 +11,15 @@ import com.squareup.picasso.Picasso;
 import com.sushant2603.googleimagesearch.R;
 
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.graphics.Point;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
-import android.provider.MediaStore.Images;
-import android.view.Display;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.view.WindowManager;
 import android.widget.ShareActionProvider;
 import android.widget.Toast;
 
@@ -40,10 +34,6 @@ public class ImageDisplayActivity extends Activity {
 		ImageResult imageResult= (ImageResult) getIntent().getSerializableExtra("result");
 		TouchImageView ivImageResult = (TouchImageView) findViewById(R.id.ivImageResult);
 		// Get the main image and modified it to display with right aspect ratio.
-        WindowManager wm = (WindowManager) this.getSystemService(Context.WINDOW_SERVICE);
-        Display display = wm.getDefaultDisplay();
-        Point size = new Point();
-        display.getSize(size);
         int newWidth = 600;
         int newHeight = (int) (newWidth * imageResult.width / imageResult.height);
 		Picasso.with(this).load(imageResult.fullUrl).resize(newWidth, newHeight).into(ivImageResult, new Callback() {

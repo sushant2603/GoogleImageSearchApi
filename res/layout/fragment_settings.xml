@@ -4,7 +4,6 @@
     android:id="@+id/layoutSetting"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#CCFCFCFC" 
     tools:context="com.example.googleimagesearch.activities.ImageDisplayActivity" >
 
     <TextView
@@ -68,11 +67,12 @@
         android:id="@+id/etSettingSite"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
         android:layout_alignBottom="@+id/tvSettingSite"
+        android:layout_alignParentRight="true"
         android:layout_alignTop="@+id/tvSettingSite"
         android:layout_toRightOf="@+id/tvSettingSite"
-        android:ems="10" />
+        android:ems="10"
+        android:hint="@string/site_hint" />
 
     <TextView
         android:id="@+id/tvSettingColor"
@@ -98,9 +98,24 @@
         android:id="@+id/btnSettingSave"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:paddingRight="20dp"
+        android:paddingTop="20dp"
+        android:gravity="center"
         android:layout_below="@+id/etSettingSite"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="36dp"
         android:text="@string/setting_save_btn" />
+
+    <Button
+        android:id="@+id/btnSettingCancel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/btnSettingSave"
+        android:layout_alignParentLeft="true"
+        android:layout_alignTop="@+id/btnSettingSave"
+        android:layout_below="@+id/etSettingSite"
+        android:gravity="center"
+        android:paddingLeft="20dp"
+        android:paddingTop="20dp"
+        android:text="@string/cancel_text" />
 
 </RelativeLayout>

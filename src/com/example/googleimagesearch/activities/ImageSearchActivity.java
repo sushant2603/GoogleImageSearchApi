@@ -18,7 +18,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
-import android.widget.EditText;
 import android.widget.SearchView;
 import android.widget.SearchView.OnQueryTextListener;
 import android.widget.Toast;
@@ -104,18 +103,20 @@ public class ImageSearchActivity extends FragmentActivity {
     	AsyncHttpClient client = new AsyncHttpClient();
     	String searchUrl = "https://ajax.googleapis.com/ajax/services/search/images?v=1.0&q="
     			+ currentQuery + "&rsz=8" + "&start=" + Integer.toString(start);
-		if (!(filterSettings.color.isEmpty())) {
-			searchUrl += "&imgcolor=" + filterSettings.color;
-		}
-		if (!(filterSettings.size.isEmpty())) {
-			searchUrl += "&imgsz=" + filterSettings.size;
-		}
-		if (!(filterSettings.type.isEmpty())) {
-			searchUrl += "&imgtype=" + filterSettings.type;
-		}
-		if (!filterSettings.site.isEmpty()) {
-			searchUrl += "&as_sitesearch=" + filterSettings.site;
-		}
+    	if (filterSettings != null) {
+			if (!(filterSettings.color.isEmpty())) {
+				searchUrl += "&imgcolor=" + filterSettings.color;
+			}
+			if (!(filterSettings.size.isEmpty())) {
+				searchUrl += "&imgsz=" + filterSettings.size;
+			}
+			if (!(filterSettings.type.isEmpty())) {
+				searchUrl += "&imgtype=" + filterSettings.type;
+			}
+			if (!filterSettings.site.isEmpty()) {
+				searchUrl += "&as_sitesearch=" + filterSettings.site;
+			}
+    	}
     	client.get(searchUrl, new JsonHttpResponseHandler() {
     		@Override
     		public void onSuccess(int statusCode, Header[] headers,
@@ -152,7 +153,7 @@ public class ImageSearchActivity extends FragmentActivity {
 			public void onFinishSettingsDialog(FilterSetting settings) {
 				filterSettings = settings;
 				aImageResults.clear();
-				//GetResults(0);
+				GetResults(0);
 			}
 		};
 	}

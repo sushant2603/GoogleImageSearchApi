@@ -106,15 +106,16 @@ containing a value of this type.
         public static final int ic_settings=0x7f020002;
     }
     public static final class id {
-        public static final int action_search=0x7f090010;
-        public static final int action_settings=0x7f09000f;
+        public static final int action_search=0x7f090011;
+        public static final int action_settings=0x7f090010;
+        public static final int btnSettingCancel=0x7f09000d;
         public static final int btnSettingSave=0x7f09000c;
         public static final int etSettingSite=0x7f09000a;
         public static final int gvResults=0x7f090001;
-        public static final int ivImage=0x7f09000d;
+        public static final int ivImage=0x7f09000e;
         public static final int ivImageResult=0x7f090000;
         public static final int layoutSetting=0x7f090002;
-        public static final int menu_item_share=0x7f09000e;
+        public static final int menu_item_share=0x7f09000f;
         public static final int spSettingColor=0x7f09000b;
         public static final int spSettingType=0x7f090006;
         public static final int spSettingsize=0x7f090005;
@@ -138,6 +139,7 @@ containing a value of this type.
     public static final class string {
         public static final int action_settings=0x7f050002;
         public static final int app_name=0x7f050000;
+        public static final int cancel_text=0x7f050010;
         public static final int hello_world=0x7f050001;
         public static final int image_description=0x7f050006;
         public static final int image_title_label=0x7f050005;
@@ -151,6 +153,7 @@ containing a value of this type.
         public static final int settings_title=0x7f050008;
         public static final int settings_title_text=0x7f050009;
         public static final int share_title=0x7f05000f;
+        public static final int site_hint=0x7f050011;
         public static final int title_activity_image_display=0x7f050007;
     }
     public static final class style {

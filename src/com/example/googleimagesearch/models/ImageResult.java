@@ -14,6 +14,8 @@ public class ImageResult implements Serializable {
 	public String title;
 	public float height;
 	public float width;
+	public float tbHeight;
+	public float tbWidth;
 
 	public ImageResult(JSONObject json) {
 		try {
@@ -22,6 +24,8 @@ public class ImageResult implements Serializable {
 			this.title = json.getString("title");
 			this.height = Float.parseFloat(json.getString("height"));
 			this.width = Float.parseFloat(json.getString("width"));
+			this.tbHeight = Float.parseFloat(json.getString("tbHeight"));
+			this.tbWidth = Float.parseFloat(json.getString("tbWidth"));
 		} catch (JSONException e) {
 			e.printStackTrace();
 		}

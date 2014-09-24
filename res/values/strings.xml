@@ -52,4 +52,6 @@
 		<item>lineart</item>
     </string-array>
 		<string name="share_title">Share</string>
+		<string name="cancel_text">Cancel</string>
+		<string name="site_hint">site.com</string>
 </resources>

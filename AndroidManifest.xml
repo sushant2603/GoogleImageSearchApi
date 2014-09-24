@@ -22,14 +22,13 @@
             android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity
             android:name="com.example.googleimagesearch.activities.ImageDisplayActivity"
             android:label="@string/title_activity_image_display"
-            android:parentActivityName="com.example.googleimagesearch.activities.ImageSearchActivity" >
+            android:parentActivityName="com.example.googleimagesearch.activities.ImageSearchActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.example.googleimagesearch.activities.ImageSearchActivity" />
